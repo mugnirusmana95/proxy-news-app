@@ -4,7 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "build": "npm run clean && npm run build:prod",
+    "build:prod": "babel src --extensions \".js,.mjs\" --out-dir dist --copy-files && cp package.json dist/",
+    "clean": "rimraf dist",
+    "vercel-build": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,8 +18,21 @@
   "dependencies": {
     "axios": "^1.9.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.0",
+    "@babel/core": "^7.24.0",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.0",
     "nodemon": "^3.1.10",
-    "pm2": "^6.0.6"
+    "pm2": "^6.0.6",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
