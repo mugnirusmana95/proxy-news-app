@@ -5,11 +5,11 @@ import axios from "axios";
 const app = express();
 app.use(cors());
 
-app.get('/api/proxy/everything', async (req, res) => {
+app.get('/proxy/everything', async (req, res) => {
   try {
     const apiKey = 'apiKey=039951eb647844c68c63c400c86eeb36';
     const target_api = 'https://newsapi.org/v2/';
-    const apiUrl = `${target_api}${req.url.replace('/api/proxy/', '')}${req.url.includes('?') ? '&' : '?'}${apiKey}`;
+    const apiUrl = `${target_api}${req.url.replace('/proxy/', '')}${req.url.includes('?') ? '&' : '?'}${apiKey}`;
     
     const response = await axios({
       url: apiUrl,
@@ -26,17 +26,9 @@ app.get('/api/proxy/everything', async (req, res) => {
   }
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-// For local development
-const PORT = process.env.PORT || 4000;
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-}
 
 export default app;
