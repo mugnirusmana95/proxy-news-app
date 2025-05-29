@@ -4,10 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "build": "npm run clean && npm run build:prod",
-    "build:prod": "babel src --extensions \".js,.mjs\" --out-dir dist --copy-files && cp package.json dist/",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "clean": "rimraf dist",
     "vercel-build": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
